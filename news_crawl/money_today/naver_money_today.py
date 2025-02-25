@@ -69,7 +69,7 @@ while True:
                 print(f"Error parsing article: {e}")
 
         # 결과 저장 (CSV 파일)
-        output_filename = f"naver_news_{ds.replace('.', '')}_{de.replace('.', '')}.csv"
+        output_filename = f"naver_news_{ds.replace('.', '')}_{de.replace('.', '')}_money_today.csv"
         with open(output_filename, "w", encoding="utf-8-sig", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=["url", "date"])
             writer.writeheader()

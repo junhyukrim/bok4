@@ -5,7 +5,7 @@ import csv
 from datetime import datetime, timedelta
 
 # 1. 날짜 및 초기 설정
-ds = "2008.10.08"  # 시작 날짜 (YYYY.MM.DD 형식)
+ds = "2008.10.02"  # 시작 날짜 (YYYY.MM.DD 형식)
 duration = 7       # 기본 기간 (days)
 min_duration = 0   # 최소 기간
 
