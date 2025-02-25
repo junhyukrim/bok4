@@ -21,7 +21,7 @@ options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 for page in range(5, 36):
-    url = f'https://www.bok.or.kr/portal/singl/newsData/list.do?pageIndex={page}&targetDepth=3&menuNo=201154&syncMenuChekKey=14&depthSubMain=&subMainAt=&searchCnd=1&searchKwd=%EA%B8%88%EC%9C%B5%ED%86%B5%ED%99%94%EC%9C%84%EC%9B%90%ED%9A%8C%20%EC%9D%98%EC%82%AC%EB%A1%9D&depth2=200038&depth3=201154&date=5&sdate=2008-01-01&edate=2025-02-24&sort=1&pageUnit=100'
+    url = f'https://www.bok.or.kr/portal/singl/newsData/list.do?pageIndex={page}&targetDepth=3&menuNo=201154&syncMenuChekKey=14&depthSubMain=&subMainAt=&searchCnd=1&searchKwd=%EA%B8%88%EC%9C%B5%ED%86%B5%ED%99%94%EC%9C%84%EC%9B%90%ED%9A%8C%20%EC%9D%98%EC%82%AC%EB%A1%9D&depth2=200038&depth3=201154&date=5&sdate=2008-01-01&edate=2025-02-24&sort=1&pageUnit=10'
     driver.get(url)
     time.sleep(1)  # 페이지 로딩 대기
 
