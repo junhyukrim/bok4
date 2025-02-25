@@ -8,16 +8,17 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from collections import defaultdict
 
 # 저장 폴더 설정
 download_folder = "naver_reports_pdf"
-os.makedirs(download_folder, exist_ok=True)  # 폴더가 없으면 생성
+os.makedirs(download_folder, exist_ok=True)
 
-# Windows에서 허용되지 않는 문자 제거 함수
+# 파일명에서 특수 문자 제거하는 함수
 def sanitize_filename(filename):
-    return re.sub(r'[\/:*?"<>|]', '', filename)  # Windows에서 허용되지 않는 문자 제거
+    return re.sub(r'[\/:*?"<>|]', '', filename)
 
-# Selenium 옵션 설정 (백그라운드 실행)
+# Selenium 옵션 설정
 chrome_options = Options()
 chrome_options.add_argument("--headless")  
 chrome_options.add_argument("--no-sandbox")
@@ -27,8 +28,12 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
+# 동일 날짜 & 동일 증권사 발행 개수 카운트
+file_count = defaultdict(int)  # {"날짜_증권사": 개수}
+
 # 최대 페이지 설정
-max_pages = 281  # 전체 페이지 크롤링
+max_pages = 281
+downloaded_count = 0  # 다운로드된 파일 개수
 
 # 페이지 순회하며 크롤링
 for page in range(1, max_pages + 1):
@@ -44,21 +49,30 @@ for page in range(1, max_pages + 1):
 
     for row in rows:
         columns = row.find_all("td")
-        if len(columns) < 5:
+        if len(columns) < 4:
             continue  # 데이터가 부족한 행 스킵
 
         title_tag = columns[0].find("a")  # 제목
         date_tag = row.find("td", class_="date")  # 날짜
-        pdf_tag = columns[2].find("a")  # PDF 다운로드 링크 (3번째 열)
+        pdf_tag = columns[2].find("a")  # PDF 다운로드 링크
 
-        if title_tag and date_tag and pdf_tag:
+        # 증권사 정보 추출 (제목 다음 <td>에서 가져오기)
+        issuer = columns[1].text.strip()  # 두 번째 <td>에서 증권사명 가져오기
+        issuer = sanitize_filename(issuer)  # 특수 문자 제거
+
+        if title_tag and date_tag and pdf_tag and issuer:
             title = title_tag.text.strip()  
             title = sanitize_filename(title)  # 특수 문자 제거
             date = date_tag.text.strip().replace(".", "")  # YYYYMMDD 형식
             pdf_link = urljoin("https://finance.naver.com", pdf_tag["href"])  # 절대 경로 변환
 
+            # 동일 날짜 + 동일 증권사 PDF 개수 증가
+            key = f"{date}_{issuer}"
+            file_count[key] += 1
+            count = file_count[key]  # 현재 개수 가져오기
+
             # 저장할 파일명 설정
-            file_name = f"{date}_{title}.pdf"
+            file_name = f"{date}_{issuer}_{count}.pdf"
             file_path = os.path.join(download_folder, file_name)
 
             # PDF 다운로드
@@ -67,6 +81,7 @@ for page in range(1, max_pages + 1):
                 with open(file_path, "wb") as f:
                     f.write(response.content)
                 print(f" 다운로드 완료: {file_name}")
+                downloaded_count += 1  # 다운로드 개수 증가
             else:
                 print(f" 다운로드 실패: {pdf_link}")
 
@@ -74,5 +89,4 @@ for page in range(1, max_pages + 1):
 
 # 브라우저 종료
 driver.quit()
-
-print(f"모든 PDF 다운로드 완료! (저장 폴더: {download_folder})")
+print(f"다운로드 완료! (총 {downloaded_count}개 저장, 폴더: {download_folder})")
