@@ -14,7 +14,7 @@ class NewsSpider(scrapy.Spider):
 
     # 합친 csv에서 url 목록 불러오기
     def start_requests(self):
-        df = pd.read_csv('C:/Users/hp/Desktop/Bootcamp/bok4/news_scraper/sample_total.csv')
+        df = pd.read_csv('csv 파일 경로 잡기')
         urls = df['url'].tolist()
 
         for url in urls:
@@ -43,7 +43,7 @@ class NewsSpider(scrapy.Spider):
         article_id = article_id_match.group(1) if article_id_match else "no_id"
 
         # 텍스트파일 저장할 폴더 생성 (없으면 자동 생성)
-        save_path = "news_sample_texts"
+        save_path = "news_texts"
         if not os.path.exists(save_path):
             os.makedirs(save_path)
         
@@ -51,7 +51,7 @@ class NewsSpider(scrapy.Spider):
         file_title = re.sub(r'[\\/*?:"<>|]', "_", clean_date)
         file_name = f'news_{file_title}_{article_id}.txt'
 
-        with open(f'C:/Users/hp/Desktop/Bootcamp/bok4/news_scraper/news_sample_texts/{file_name}','w', encoding='utf-8') as f:
+        with open(f'news_texts/{file_name}','w', encoding='utf-8') as f:
             f.write(f'{title}\n')
             f.write(f'{clean_date}\n')
             f.write(f'{content}\n')
