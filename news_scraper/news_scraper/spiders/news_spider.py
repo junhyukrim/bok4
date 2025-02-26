@@ -55,5 +55,5 @@ class NewsSpider(scrapy.Spider):
 
         self.log(f'Saved file: {file_name}')
 
-        # 스크래피 처음부터 크롤링 실행 시, `scrapy crawl news`
-        # 중단된 크롤링 이어서 실행 시, 'scrapy crawl news -s JOBDIR=crawls/news_spider_state'
+        # 스크래피 실행 시 터미널에 다음과 같은 명령어 입력: `scrapy crawl news`
+
