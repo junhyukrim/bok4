@@ -14,7 +14,7 @@ class NewsSpider(scrapy.Spider):
 
     # 합친 csv에서 url 목록 불러오기
     def start_requests(self):
-        df = pd.read_csv('병합한 csv 파일이 있는 주소 입력')
+        df = pd.read_csv('C:/Users/egege/OneDrive/Documents/bok4_resource/news_url_csv/money_today/total.csv')
         urls = df['url'].tolist()
 
         for url in urls:
