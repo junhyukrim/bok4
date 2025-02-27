@@ -14,7 +14,7 @@ class NewsSpider(scrapy.Spider):
 
     # 합친 csv에서 url 목록 불러오기
     def start_requests(self):
-        df = pd.read_csv('C:/Users/wosle/OneDrive/Desktop/Bok_Projet_woslek/Financial_News_text/news_scraper/news_scraper/spiders/naver_news_Financial_News_merged.csv')
+        df = pd.read_csv('병합한 csv 파일이 있는 주소 입력')
         urls = df['url'].tolist()
 
         for url in urls:
@@ -24,10 +24,7 @@ class NewsSpider(scrapy.Spider):
     def parse(self, response):
         title = response.css('h2#title_area span::text').get(default='N/A')
         date_raw = response.css('span.media_end_head_info_datestamp_time._ARTICLE_DATE_TIME::attr(data-date-time)').get(default="N/A")
-        content = ' '.join(response.css('div#contents.newsct_body::text').getall()).strip()
-
-        if not content:
-            content = ' '.join(response.css('article#dic_area::text').getall()).strip()
+        content = ' '.join(response.css('div.newsct_article p::text').getall()).strip()
 
         # 로그에 date_raw 값 출력 (디버깅용)
         self.log(f"DEBUG: Extracted date_raw: {date_raw}")
