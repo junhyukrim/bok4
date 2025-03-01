@@ -38,16 +38,16 @@ def extract_text_from_columns(pdf_path, page_numbers, bbox_column1, bbox_column2
     return extracted_texts
 
 # PDF 파일 경로
-pdf_path = "이트레이드증권_150128_1.pdf"
+pdf_path = "현대차증권_120705_1.pdf"
 
 # 추출할 페이지 번호 리스트 (예: 1페이지만)
 page_numbers = [0]
 
 # 첫 번째 열 본문 영역 좌표 설정 (x0, y0, x1, y1)
-bbox_column1 = (10, 100, 280, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
+bbox_column1 = (150, 120, 550, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
 
 # 두 번째 열 본문 영역 좌표 설정 (x0, y0, x1, y1)
-bbox_column2 = (280, 100, 580, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
+bbox_column2 = (20, 300, 550, 700)  # 좌표는 PDF 레이아웃에 따라 조정 필요
 
 # 여러 페이지에서 두 열의 텍스트 추출 및 결합
 texts_by_page = extract_text_from_columns(pdf_path, page_numbers=page_numbers,

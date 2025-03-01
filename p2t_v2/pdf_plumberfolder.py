@@ -52,10 +52,10 @@ def process_pdfs_in_folder(input_folder, output_folder, page_number, bbox):
             print(f"Processed: {filename} -> {output_file_name}")
 
 # 설정 값
-input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1이트레이드/thebond_whitr"  # PDF 파일이 있는 폴더 경로
-output_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1이트레이드/thebond_whitr/txted"  # 추출된 텍스트 저장 폴더 경로
+input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/ficorange-nonetype"  # PDF 파일이 있는 폴더 경로
+output_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/ficorange-nonetype/txted"  # 추출된 텍스트 저장 폴더 경로
 page_number = 0  # 첫 번째 페이지(0부터 시작)
-bbox = (10, 350, 550, 600) # 본문 좌표 (x0, y0, x1, y1)
+bbox = (150, 150, 550, 800)  # 본문 좌표 (x0, y0, x1, y1)
 
 # 실행
 process_pdfs_in_folder(input_folder, output_folder, page_number, bbox)

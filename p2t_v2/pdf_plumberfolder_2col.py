@@ -59,15 +59,15 @@ def process_pdfs_in_folder(input_folder, output_folder, page_number, bbox_column
             print(f"Processed: {filename} -> {output_file_name}")
 
 # 설정 값
-input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1이트레이드/FCM"  # PDF 파일이 있는 폴더 경로
-output_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1이트레이드/FCM/txted"  # 추출된 텍스트 저장 폴더 경로
+input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/ficorange-graphtype/keyword_yes"  # PDF 파일이 있는 폴더 경로
+output_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/ficorange-graphtype/keyword_yes/txted"  # 추출된 텍스트 저장 폴더 경로
 page_number = 0  # 첫 번째 페이지(0부터 시작)
 
 # 첫 번째 열 본문 영역 좌표 설정 (x0, y0, x1, y1)
-bbox_column1 = (10, 120, 280, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
+bbox_column1 = (150, 120, 550, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
 
 # 두 번째 열 본문 영역 좌표 설정 (x0, y0, x1, y1)
-bbox_column2 = (280, 120, 580, 300)  # 좌표는 PDF 레이아웃에 따라 조정 필요
+bbox_column2 = (20, 300, 550, 700)  # 좌표는 PDF 레이아웃에 따라 조정 필요
 
 # 실행
 process_pdfs_in_folder(input_folder, output_folder, page_number,
