@@ -46,8 +46,8 @@ def process_pdf_folder(pdf_folder_path, txt_folder_path):
             rename_txt_file_based_on_date(txt_path)  # TXT 파일 이름 변경
 
 # 경로 설정
-pdf_folder_path = './pdf_files'  # PDF 파일이 담긴 폴더 경로
-txt_folder_path = './txt_files'  # 변환된 TXT 파일을 저장할 폴더 경로
+pdf_folder_path = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/미래에셋/오렌지헤더'  # PDF 파일이 담긴 폴더 경로
+txt_folder_path = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/미래에셋/오렌지헤더/txted'  # 변환된 TXT 파일을 저장할 폴더 경로
 
 # 실행
 process_pdf_folder(pdf_folder_path, txt_folder_path)

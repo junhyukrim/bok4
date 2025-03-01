@@ -11,7 +11,7 @@ def pdf_to_txt_with_pdfplumber(pdf_path, txt_path):
         txt_file.write(text)
 
 # path
-pdf_path = "제26차 금통위 의사록.pdf"
+pdf_path = "이트레이드증권_140701_1.pdf"
 txt_path = "bok_minute_pdfplumber.txt"
 
 # exe

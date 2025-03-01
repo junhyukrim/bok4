@@ -2,7 +2,7 @@ import os
 import re
 import glob
 
-def clean_text(content, words_to_remove, onlyword_list):
+def clean_text(content, words_to_remove, onlyword_list, startword_list):
     """
     텍스트 정리 규칙을 적용하는 함수:
     1. 한글이 포함되어 있지 않은 줄은 삭제
@@ -13,7 +13,8 @@ def clean_text(content, words_to_remove, onlyword_list):
     6. 특수문자 삭제
     7. 지정된 단어 리스트에 있는 단어들 삭제
     8. 영어 제거
-    9. onlyword_list에 있는 단어들만 한 줄로 이루어진 경우 해당 줄 삭제
+    9. onlyword_list에 있는 단어들로만 구성된 줄 삭제
+    10. startword_list의 단어로 시작하는 줄 삭제
     """
     # 줄 단위로 처리
     lines = content.split('\n')
@@ -23,6 +24,7 @@ def clean_text(content, words_to_remove, onlyword_list):
         # 1. 한글이 포함되어 있는지 확인
         if not re.search('[가-힣]', line):
             continue
+        
         
         # 2. 메일주소 형식 삭제
         line = re.sub(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', '', line)
@@ -44,7 +46,7 @@ def clean_text(content, words_to_remove, onlyword_list):
         line = re.sub(r'[a-zA-Z]+', '', line)
         
         # 7. 특수문자 삭제 (한글, 공백 외 모두 제거)
-        line = re.sub(r'[^\w\s가-힣]', '', line)
+        line = re.sub(r'[^\w\s가-힣\.]', '', line) 
         
         # 8. 공백 정리 (연속된 공백을 하나로)
         line = re.sub(r'\s+', ' ', line).strip()
@@ -53,26 +55,51 @@ def clean_text(content, words_to_remove, onlyword_list):
         for word in words_to_remove:
             line = line.replace(word, '')
         
-        # 10. onlyword_list에 있는 단어들만 한 줄로 이루어진 경우 해당 줄 삭제
-        if any(line == word for word in onlyword_list):
+        # 10. onlyword_list에 있는 단어들로만 구성된 줄 삭제
+        if line:
+            # 줄을 단어로 분리
+            words_in_line = line.split()
+            
+            # 모든 단어가 onlyword_list에 있는지 확인
+            all_words_in_list = all(word in onlyword_list for word in words_in_line)
+            
+            # 모든 단어가 리스트에 있으면 건너뛰기
+            if all_words_in_list:
+                continue
+        
+        # 11. startword_list의 단어로 시작하는 줄 삭제
+        if any(line.strip().startswith(word) for word in startword_list):
             continue
         
         # 내용이 있는 줄만 추가
         if line:
             cleaned_lines.append(line)
     
-    return '\n'.join(cleaned_lines)
+    # 12. '본 조사자료는'으로 시작하는 부분 이후를 모두 삭제
+    final_text = '\n'.join(cleaned_lines)
+    disclaimer_index = final_text.find('본 조사자료는')
+    if disclaimer_index != -1:
+        final_text = final_text[:disclaimer_index]
+    
+    return final_text
+
+    
 
 def process_files():
     # 제거할 단어 리스트 정의
     words_to_remove = [
-        "이정준", "이정준 연구위원", "자료제공일", "년 월 일"
+        "이정준", "이정준 연구위원", "자료제공일", "년 월 일", "황원화"
     ]
     
-    # onlyword_list 정의 (해당 단어들만 한 줄로 있을 경우 해당 줄 삭제)
+    # onlyword_list 정의 (해당 단어들로만 구성된 줄 삭제)
     onlyword_list = [
-        "국고채년", "통안년", "특수채년", "한전채년", "산금채년", "회사채년"
+        "국고채년", "통안년", "특수채년", "한전채년", "산금채년", "회사채년", "한국", "미국", "영국", "일본", "독일", "은행채", "회사채", "국고채", "통안", "자료", "투자증권", "스프레드", 
+        "현대백화점", "주간 시장 동향 및 전망", "황원하", "전주대비", "특수채", "여전채", "국민종년", "예보년", "크레딧", "스프레드", "연평균", "신계열", "구계열","년","월","일일", "국고","국고국고",
+        "국고년","국종년","특수년","한전년","산금년","회사년","전월말대비", "중국", "홍콩", "선물", "선물가격", "저평가폭"
     ]
+    
+    # startword_list 정의 (해당 단어로 시작하는 줄 삭제)
+    startword_list = ['도표 ', '종목 ', '자료 ', '그림 ']
     
     # input_folder 내의 모든 txt 파일 찾기
     input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_txt/bond_txt/test/input"  # 원본 텍스트 파일들이 있는 폴더
@@ -100,7 +127,7 @@ def process_files():
                 continue
         
         # 텍스트 정리 규칙 적용
-        cleaned_content = clean_text(content, words_to_remove, onlyword_list)
+        cleaned_content = clean_text(content, words_to_remove, onlyword_list, startword_list)
         
         # 처리된 내용 저장
         output_path = os.path.join(output_folder, file_name)
