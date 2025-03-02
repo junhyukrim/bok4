@@ -42,6 +42,6 @@ def process_folder(input_folder, output_folder):
             print(f"Processed: {filename}")
 
 # 실행 예제
-input_folder = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나/1_type1_greenheader_graph/txted'  # 처리할 파일이 들어있는 폴더 경로
-output_folder = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나/1_type1_greenheader_graph/txted/tailcrop'  # 처리된 파일이 저장될 폴더 경로
+input_folder = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/한화/bond_breif/txted'  # 처리할 파일이 들어있는 폴더 경로
+output_folder = 'C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/한화/bond_breif/txted/tailcrop'  # 처리된 파일이 저장될 폴더 경로
 process_folder(input_folder, output_folder)
