@@ -2,18 +2,18 @@ import os
 import pdfplumber
 
 # 키워드 리스트 정의
-keywords = ["Fund Flow 추이"]  # 원하는 키워드를 여기에 추가
+keywords = ["Compliance Notice"]  # 원하는 키워드를 여기에 추가
 
 # 폴더 경로 설정
-base_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나/1_type1_greenheader_graph"
-keyword_yes_folder = os.path.join(base_folder, "fundflow")
+base_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나"
+keyword_yes_folder = os.path.join(base_folder, "Type2")
 
 # 결과 폴더 생성
 os.makedirs(keyword_yes_folder, exist_ok=True)
 
 # bbox 설정 (예: 페이지의 특정 영역)
 # (0, 0, 0, 0)으로 설정하면 페이지 전체에서 텍스트를 추출
-bbox = (0, 200, 400, 830)  # x0, top, x1, bottom
+bbox = (0, 150, 200, 730)  # x0, top, x1, bottom
 
 # 페이지 설정 (1부터 시작)
 page_number = 1  # 텍스트를 추출할 페이지 번호 (1부터 시작)

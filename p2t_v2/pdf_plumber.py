@@ -30,13 +30,13 @@ def extract_text_from_pages(pdf_path, page_numbers, bbox):
     return extracted_texts
 
 # PDF 파일 경로
-pdf_path = "현대차증권_100930_1.pdf"
+pdf_path = "하나증권_150720_2.pdf"
 
-# 추출할 페이지 번호 리스트 (예: 1페이지와 2페이지)
-page_numbers = [0,1,2]
+# 추출할 페이지 번호 리스트 (예: 0부터 시작)
+page_numbers = [0]
 
 # 본문 영역 좌표 설정 (x0, y0, x1, y1)
-bbox = (50, 300, 550, 800)  # 좌표는 PDF 레이아웃에 따라 조정 필요
+bbox = (0, 200, 400, 830)  # 좌표는 PDF 레이아웃에 따라 조정 필요
 
 # 여러 페이지에서 본문 텍스트 추출
 texts_by_page = extract_text_from_pages(pdf_path, page_numbers=page_numbers, bbox=bbox)

@@ -32,8 +32,8 @@ def process_folder(folder_path, keywords):
             clean_text_file(file_path, keywords)
 
 # 설정 값
-folder_path = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/center_bond_plus/txted"  # 텍스트 파일 폴더 경로
-keywords = ['<그림','■','관심 차트 및 경제지표', '예상 금리 레인지','(그림1)','▶ Check Point','▶ Bond Market Check Point','주간 레인지 전망','월간 레인지 전망', '그림 1.', '그림 2.','표 1.','Key Charts','향후 국고채 3년','금리와 신용스프레드','국채 금리와 외국인 국채선물 누적순매수','실적 패턴을 이용한 최종 선택 그룹','국내주요금리 (%,']  # 삭제 기준이 되는 키워드 리스트
+folder_path = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나/1_type1_greenheader_graph/fundflow/txted"  # 텍스트 파일 폴더 경로
+keywords = ['Fund Flow']  # 삭제 기준이 되는 키워드 리스트
 
 # 실행
 process_folder(folder_path, keywords)
