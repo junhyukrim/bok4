@@ -21,11 +21,18 @@ def process_txt_to_dataframe(file_path, replacement_dict, exception_list):
     # 규칙 1: (cid:{숫자}) 형태를 "."으로 대체
     content = re.sub(r'\(cid:\d+\)', '.', content)
 
+    # 규칙 1.1: 모든 ',' 제거
+    content = content.replace(',', '')
+
+    # 규칙 2.01: 숫자.숫자.숫자 형식의 "." 제거
+    content = re.sub(r'(\d)\.(\d)\.(\d)', r'\1\2\3', content)
+    
     # 규칙 2: 소수점({숫자}.{숫자}) 표현에서 "." 제거
     content = re.sub(r'(\d)\.(\d)', r'\1\2', content)
 
-    # 규칙 2.1: 모든 괄호 안의 내용을 괄호 포함 삭제
-    content = re.sub(r'\(.*?\)', '', content)
+
+    # 규칙 2.1: 모든 괄호 안의 내용을 괄호 포함 삭제 (줄바꿈 포함)
+    content = re.sub(r'\(.*?\)', '', content, flags=re.DOTALL)
 
     # 규칙 2.2: 모든 더블 스페이스를 싱글 스페이스로 변환
     content = re.sub(r'\s{2,}', ' ', content)
@@ -81,7 +88,7 @@ def process_txt_to_dataframe(file_path, replacement_dict, exception_list):
     combined_content = re.sub(r'(?<!\s)\.', '. ', combined_content).strip()
     
     # 규칙 4: . ! ? 를 기준으로 문장을 나누기
-    sentences = re.split(r'(?<=[.!?])\s+', combined_content)
+    sentences = re.split(r'(?<=[.!?])\s*', combined_content)
     
     # DataFrame 생성
     data = []
@@ -119,22 +126,67 @@ def process_folder_to_single_csv(input_folder, output_csv_path, replacement_dict
         print("처리할 파일이 없습니다.")
 
 
+
+def process_csv(file_path):
+    # CSV 파일 읽기
+    df = pd.read_csv(file_path)
+    
+    # `original_sentence` 값이 마침표(.) 하나만 포함된 행 제거
+    df = df[df['original_sentence'] != '.']
+    
+    # `original_sentence` 값에 한글이 없으면 해당 행 삭제
+    df = df[df['original_sentence'].apply(lambda x: any('\u3131' <= char <= '\u3163' or '\uac00' <= char <= '\ud7a3' for char in str(x)))]
+    
+    # doc_id별로 그룹화하고 sentence_id를 1부터 다시 재발급
+    df['sentence_id'] = df.groupby('doc_id').cumcount() + 1
+    
+    # 수정된 데이터프레임을 원래 파일에 덮어쓰기
+    df.to_csv(file_path, index=False)
+    print(f"File '{file_path}' has been successfully updated.")
+
+
+def replace_values_in_csv(file_path, replacement_dict):
+    # CSV 파일 읽기
+    df = pd.read_csv(file_path)
+    
+    # `original_sentence` 열에서 딕셔너리의 키를 찾아 값으로 대체
+    for key, value in replacement_dict.items():
+        df['original_sentence'] = df['original_sentence'].str.replace(key, value, regex=True)
+    
+    # 수정된 데이터프레임을 원래 파일에 덮어쓰기
+    df.to_csv(file_path, index=False, encoding='utf-8-sig')
+    print(f"File '{file_path}' has been successfully updated.")
+
 # 실행 예제
-input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/하나/0cleansed"  # TXT 파일들이 저장된 폴더 경로
-output_csv_path = "C:\Users\egege\OneDrive\Documents\bok4_resource\bond_csv/bond_hana.csv"  # 통합된 CSV 파일 경로
+input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/1_현대차증권/0cleansed"  # TXT 파일들이 저장된 폴더 경로
+output_csv_path = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_csv/bond_hyundai.csv"  # 통합된 CSV 파일 경로
 
 # 딕셔너리 정의 (규칙 3.3 적용)
 replacement_dict = {
     "vs.": "vs",
-    "보임": "보임.",
+    "보임 ": "보임.",
     " 전 망한 ": " 전망한 ",
-    "지난 주 시장 요약 ":"",
-    "지난 주 시장 요약 ":"",
-    "지난 주 시장 요약 ":"",
-    
+    "":""
 }
 
 # 예외 리스트 정의 (규칙 3에서 제외할 특수 문자들)
 exception_list = ["'"]  # 예시: "'"는 규칙 3의 적용을 받지 않음
 
 process_folder_to_single_csv(input_folder, output_csv_path, replacement_dict, exception_list)
+process_csv(output_csv_path)
+
+
+
+
+# 실행 예제
+
+
+# # 딕셔너리 정의 (key를 value로 대체)
+# replacement_dict = {
+#     "국내 채권시장 .채권>": "",
+#     "국내 채권시장 동향 .채권>": "",
+#     "채무재조정": "채무 재조정",
+#     # 필요한 키-값 쌍을 추가하세요
+# }
+
+# replace_values_in_csv(output_csv_path, replacement_dict)
