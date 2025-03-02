@@ -15,9 +15,9 @@ def pdf_to_txt(pdf_path, txt_path):
     with open(txt_path, 'w', encoding='utf-8') as txt_file:
         txt_file.write(text)
 
-# PDF 파일 경로와 저장할 TXT 파일 경로
+# path
 pdf_path = "제26차 금통위 의사록.pdf"
 txt_path = "bok_minute_001.txt"
 
-# 함수 실행
+# exe
 pdf_to_txt(pdf_path, txt_path)
