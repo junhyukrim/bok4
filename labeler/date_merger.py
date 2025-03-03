@@ -1,14 +1,14 @@
 import pandas as pd
 
 # 파일 경로
-call_rate_path = "call_rate_cropped.csv"
-base_rate_path = "base_rate_cropped.csv"
-output_path = "merged_rates.csv"
+a_path = "labeled_rates.csv"
+b_path = "toekn_hanguk_bond.csv"
+output_path = "labeled_toekn_hanguk_bond.csv"
 
 try:
     # CSV 파일 읽기
-    call_rate_df = pd.read_csv(call_rate_path)
-    base_rate_df = pd.read_csv(base_rate_path)
+    call_rate_df = pd.read_csv(a_path)
+    base_rate_df = pd.read_csv(b_path)
 
     # 'date' 열을 기준으로 병합 (inner join)
     merged_df = pd.merge(call_rate_df, base_rate_df, on="date", how="inner")
