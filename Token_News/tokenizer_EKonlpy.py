@@ -3,7 +3,7 @@ from ekonlpy.tag import Mecab
 import csv
 
 # CSV 파일 읽기
-df = pd.read_csv('bond_cape_fixed.csv', encoding='utf-8-sig')
+df = pd.read_csv('C:/Users/hp/Downloads/total_bond_csv/bond_merged/bond_merged.csv', encoding='utf-8-sig')
 
 # Mecab 초기화
 mecab = Mecab()
@@ -26,13 +26,13 @@ df['pos_tagged'] = df['original_sentence'].apply(pos_tagging)
 df['tokenized'] = df['original_sentence'].apply(only_tokens)
 
 # CSV로 저장 (튜플 형태 유지)
-output_path = 'sample_bond_cape_tokenized.csv'
+output_path = 'C:/Users/hp/Downloads/total_bond_csv/bond_merged/tokenized_total_bond.csv'
 df.to_csv(
     output_path,
     index=False,
     encoding='utf-8-sig',
     quoting=csv.QUOTE_NONE,  # 따옴표 없이 저장
-    sep='|',                 # 구분자 변경
+    sep=',',                 # 구분자 변경
     escapechar='\\'          # 특수문자 처리
 )
 
