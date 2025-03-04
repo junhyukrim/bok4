@@ -3,14 +3,16 @@ from ekonlpy.tag import Mecab
 import csv
 
 # CSV 파일 읽기
-df = pd.read_csv('C:/', encoding='utf-8-sig') # 읽을 csv 파일 경로
+df = pd.read_csv('C:/Users/hp/Downloads/total_bond_csv/bond_merged/bond_merged.csv', encoding='utf-8-sig') # 불러들일 csv 파일 경로를 입력해주세요.
 
 # Mecab 초기화
 mecab = Mecab()
 
 # 불용어 품사 설정
 stop_pos = [
-    """불용어 품사 리스트를 작성해 주세요"""
+    'NR', 'MAJ', 'JKS', 'JKC', 'JKG', 'JKO', 'JKB', 'JKV', 'JKQ', 'JC', 'JK',
+    'NNBC', 'SF', 'SE', 'SW', 'SH', 'SN', 'XSV', 'EP', 'EF', 'EC', 'ETN', 'ETM',
+    'VCP', 'XSA', 'XSV', 'XSN', 'SSO'
 ]
 
 # 품사 태깅 함수
@@ -40,7 +42,7 @@ df['stopword_tokens'] = df['pos_tagged'].apply(extract_stopwords)
 # df['cleaned_tokens'] = df['pos_tagged'].apply(clean_tokens)
 
 # CSV로 저장 (튜플 형태 유지)
-output_path = 'csv저장할 경로'
+output_path = 'C:/Users/hp/Downloads/total_bond_csv/bond_merged/tokenized_total_bond_temp.csv' # csv 파일 이름 설정 및 경로를 적어주세요.
 df.to_csv(
     output_path,
     index=False,
@@ -50,6 +52,6 @@ df.to_csv(
 )
 
 print(f":white_tick: {output_path} 저장 완료.")
-print(df[['date', 'doc_id', 'sentence_id', 'original_sentence', 'tokenized', 'pos_tagged', 'stopword_tokens']].head())
+print(df[['date', 'doc_id', 'sentence_id', 'original_sentence', 'tokenized', 'pos_tagged', 'stopword_tokens', 'cleaned_tokens']].head())
 
 #, 'cleaned_tokens'
