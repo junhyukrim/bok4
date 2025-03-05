@@ -55,7 +55,7 @@ def merge_and_filter_dictionaries(json_data_list, min_count=1):
     print("Dictionaries merged and filtered.")  # 병합 및 필터링 완료 메시지
     return final_dict
 
-def save_to_json(data, output_folder, output_file_name="final_dictionary.json"):
+def save_to_json(data, output_folder, output_file_name):
     """
     데이터를 지정된 폴더에 JSON 파일로 저장합니다.
     
@@ -77,20 +77,36 @@ def save_to_json(data, output_folder, output_file_name="final_dictionary.json"):
     
     print(f"Final dictionary saved to {output_path}")
 
-# 메인 실행 함수
-def main(input_folder, output_folder):
-    print("Loading JSON files from folder...")
-    json_data_list = load_json_files(input_folder)
+def process_all_subfolders(parent_folder, output_folder):
+    """
+    부모 디렉토리 내 모든 하위 폴더를 처리하여 결과를 저장합니다.
     
-    print("Merging dictionaries and filtering by count...")
-    final_dict = merge_and_filter_dictionaries(json_data_list, min_count=15)
+    Args:
+        parent_folder (str): 부모 디렉토리 경로.
+        output_folder (str): 결과 저장 디렉토리 경로.
     
-    print("Saving final dictionary to folder...")
-    save_to_json(final_dict, output_folder)
+    Returns:
+        None
+    """
+    for subfolder in os.listdir(parent_folder):
+        subfolder_path = os.path.join(parent_folder, subfolder)
+        
+        if os.path.isdir(subfolder_path):  # 하위 폴더만 처리
+            print(f"Processing folder: {subfolder}")
+            
+            # JSON 데이터 로드
+            json_data_list = load_json_files(subfolder_path)
+            
+            # 병합 및 필터링 수행
+            final_dict = merge_and_filter_dictionaries(json_data_list, min_count=15)
+            
+            # 결과 저장 (파일명에 하위 폴더명 포함)
+            output_file_name = f"final_dictionary_{subfolder}.json"
+            save_to_json(final_dict, output_folder, output_file_name)
 
 # 실행 예제
 if __name__ == "__main__":
-    input_folder = "D:/bok4_resource/json_dict/00final_dict/final"  # JSON 파일이 담긴 폴더 경로
-    output_folder = "D:/bok4_resource/json_dict/00final_dict/final_dict"  # 최종 사전 저장 폴더 경로
+    parent_folder = "D:/bok4_resource/json_dict/00final_dict"  # 상위 디렉토리 경로
+    output_folder = "D:/bok4_resource/json_dict/00final_dict/final_dict"  # 결과 저장 디렉토리
     
-    main(input_folder, output_folder)
+    process_all_subfolders(parent_folder, output_folder)

@@ -49,5 +49,5 @@ def main(folder_path):
 
 # 실행 예제
 if __name__ == "__main__":
-    folder_path = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_ngram/labeled"  # CSV 파일이 담긴 폴더 경로
+    folder_path = "D:/bok4_resource/news_labeled/파이낸셜최종라벨"  # CSV 파일이 담긴 폴더 경로
     main(folder_path)
