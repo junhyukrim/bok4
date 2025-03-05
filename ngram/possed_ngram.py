@@ -13,7 +13,7 @@ def process_csv(input_file, output_file):
     df = pd.read_csv(input_file)
 
     # pos_tagged 열에서 문자열을 리스트로 변환
-    df['pos_tagged_list'] = df['pos_tagged'].apply(lambda x: [f"{word}/{tag}" for word, tag in ast.literal_eval(x)])
+    df['pos_tagged_list'] = df['cleaned_tokens'].apply(lambda x: [f"{word}/{tag}" for word, tag in ast.literal_eval(x)])
 
     # 1-gram부터 5-gram까지 생성
     for n in range(1, 6):
@@ -32,6 +32,6 @@ def process_csv(input_file, output_file):
     df.to_csv(output_file, index=False)
 
 # 실행 예시
-input_csv = "tokenized_total_bond_2_chunk_1.csv"
-output_csv = "tokenized_total_bond_2_chunk_2_with_ngrams.csv"
+input_csv = "bond_merged_clean_tokenized.csv"
+output_csv = "bond_merged_clean_tokenized.csv_with_ngrams.csv"
 process_csv(input_csv, output_csv)
