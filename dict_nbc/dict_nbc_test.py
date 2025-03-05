@@ -1,8 +1,9 @@
 import os
 import pandas as pd
-from collections import defaultdict, Counter
+from collections import defaultdict
+import json
 
-# 1. 폴더 내 모든 CSV 파일 읽기
+# 폴더 내 모든 CSV 파일 읽기
 def load_files_from_folder(folder_path):
     all_data = []
     for file_name in os.listdir(folder_path):
@@ -12,7 +13,7 @@ def load_files_from_folder(folder_path):
             all_data.append(data)
     return pd.concat(all_data, ignore_index=True)
 
-# 2. n-gram별 Hawkish/Dovish 점수 계산
+# n-gram별 Hawkish/Dovish 점수 계산 (빈도 포함)
 def calculate_ngram_scores(data):
     ngram_columns = ['1gram', '2gram', '3gram', '4gram', '5gram']
     ngram_scores = defaultdict(lambda: {'count': 0, 'score_sum': 0})
@@ -32,21 +33,12 @@ def calculate_ngram_scores(data):
     
     return ngram_scores
 
-# 3. Hawkish & Dovish 사전 생성
-def build_hawkish_dovish_dict(ngram_scores, threshold=0.2):
-    hawkish_dict = {}
-    dovish_dict = {}
-    
-    for ngram, values in ngram_scores.items():
-        score = values['score']
-        if score > threshold:  # Hawkish 기준
-            hawkish_dict[ngram] = score
-        elif score < -threshold:  # Dovish 기준
-            dovish_dict[ngram] = score
-    
-    return hawkish_dict, dovish_dict
+# 사전 생성 및 저장
+def save_dictionaries(ngram_scores, output_file):
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(ngram_scores, f, ensure_ascii=False, indent=4)
 
-# 4. 메인 실행 함수
+# 메인 실행 함수
 def main(folder_path):
     print("Loading data from folder...")
     data = load_files_from_folder(folder_path)
@@ -54,15 +46,12 @@ def main(folder_path):
     print("Calculating n-gram scores...")
     ngram_scores = calculate_ngram_scores(data)
     
-    print("Building Hawkish & Dovish dictionaries...")
-    hawkish_dict, dovish_dict = build_hawkish_dovish_dict(ngram_scores)
+    print("Saving dictionaries to JSON...")
+    save_dictionaries(ngram_scores, "ngram_scores.json")
     
-    print("Hawkish Dictionary (Top 10):", list(hawkish_dict.items())[:10])
-    print("Dovish Dictionary (Top 10):", list(dovish_dict.items())[:10])
-    
-    return hawkish_dict, dovish_dict
+    print("Dictionaries saved to 'ngram_scores.json'")
 
 # 실행 예제
 if __name__ == "__main__":
     folder_path = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_ngram/labeled"  # CSV 파일이 담긴 폴더 경로
-    hawkish_dict, dovish_dict = main(folder_path)
+    main(folder_path)
