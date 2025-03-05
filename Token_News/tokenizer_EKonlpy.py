@@ -29,7 +29,7 @@ def only_tokens(text):
 
 # 불용어 태그 추출 함수
 def extract_stopwords(pos_tags):
-    return [(word, pos) for word, pos in pos_tags if pos in stop_pos]
+    return [(word, pos) for word, pos in pos_tag s if pos in stop_pos]
     
 # 클린 토큰 함수(불용어 제외)
 def clean_tokens(pos_tags):

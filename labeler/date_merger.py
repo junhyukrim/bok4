@@ -2,8 +2,8 @@ import pandas as pd
 
 # 파일 경로
 a_path = "labeled_rates.csv"
-b_path = "toekn_hanguk_bond.csv"
-output_path = "labeled_toekn_hanguk_bond.csv"
+b_path = "tokenized_total_bond_2_chunk_1.csv"
+output_path = "labeled_tokenized_total_bond_2_chunk_1.csv"
 
 try:
     # CSV 파일 읽기
