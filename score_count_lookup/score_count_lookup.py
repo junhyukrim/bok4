@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # JSON 사전 로드
-with open('D:/bok4_resource/score_count/sample/final_dictionary.json', 'r', encoding='utf-8') as f:
+with open('D:/bok4_resource/score_count/sample/fina_dictionary_new.json', 'r', encoding='utf-8') as f:
     dictionary = json.load(f)
 
 # CSV 파일 로드
