@@ -7,13 +7,6 @@ def count_unique_docs(df):
     """
     return df['doc_id'].nunique()
 
-def count_docs_with_label(df, label):
-    """
-    특정 market_label 값을 가지는 unique doc_id의 개수를 반환하는 함수
-    """
-    return df[df['market_label'] == label]['doc_id'].nunique()
-
-
 input_folder = "인풋폴더"
 output_folder = "아웃풋폴더"
 os.makedirs(output_folder, exist_ok=True)
