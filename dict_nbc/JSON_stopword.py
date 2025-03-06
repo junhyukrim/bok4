@@ -1,7 +1,7 @@
 import json
 
 # JSON 파일 경로
-input_file = 'D:/bok4_resource/json_dict/00final_dict/final_dict/100filter_neutralremoved/final_dictionary_1_removed.json'
+input_file = 'D:/bok4_resource/json_dict/00final_dict/final_dict_new/final_dictionary_last_neutral_removed.json'
 
 # 삭제할 키워드 리스트
 keywords_to_remove = ["이데일리", "네이버", "청춘/NNG 우스/NNG","꿀/NNG 잼/NNG","웹툰/NNG", "뉴스", "우스", "갤럭시", "워치", "비밀",

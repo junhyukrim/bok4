@@ -29,5 +29,5 @@ def remove_entries_with_count_one(folder_path):
 
 # 실행 예제
 if __name__ == "__main__":
-    folder_path = "D:/download/news_asiae_scores/dict_asiae"  # JSON 파일이 담긴 폴더 경로
+    folder_path = "D:/download/머니투데이누락_scores"  # JSON 파일이 담긴 폴더 경로
     remove_entries_with_count_one(folder_path)

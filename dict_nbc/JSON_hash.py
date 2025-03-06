@@ -22,7 +22,7 @@ def generate_precise_hash(x, y):
     return hash_value
 
 # JSON 파일 로드
-input_file = "D:/bok4_resource/json_dict/00final_dict/final_dict/final_dictionary.json"
+input_file = "D:/bok4_resource/json_dict/00final_dict/final_dict_new/final_dictionary_neutral_removed.json"
 with open(input_file, 'r', encoding='utf-8') as file:
     data = json.load(file)
 

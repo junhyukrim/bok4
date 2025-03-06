@@ -2,7 +2,7 @@ import json
 import os  # 파일 경로 처리를 위해 os 모듈 사용
 
 # 원본 JSON 파일 경로
-input_file = 'D:/bok4_resource/json_dict/00final_dict/final_dict/final_dictionary_100filtered_sorted.json'
+input_file = 'D:/bok4_resource/json_dict/00final_dict/final_dict_new/final_dictionary_last.json'
 
 # JSON 파일 로드
 with open(input_file, 'r', encoding='utf-8') as file:
@@ -19,7 +19,7 @@ filtered_data = {
 }
 
 # 2. score 기준으로 내림차순 정렬
-sorted_data = dict(sorted(filtered_data.items(), key=lambda x: x[1]['score'], reverse=True))
+sorted_data = dict(sorted(filtered_data.items(), key=lambda x: x[1]['hashcount'], reverse=True))
 
 # 원본 파일명에서 디렉터리와 확장자 분리
 file_dir, file_name = os.path.split(input_file)
