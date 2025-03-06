@@ -29,8 +29,7 @@ def calculate_count_and_score(row):
                     count = dictionary[ngram]['count']
                     score = dictionary[ngram]['score']
                     result.append(f"({count},{score})")
-                else:
-                    result.append("(0,0)")  # 사전에 없는 경우 기본값
+                
     return ', '.join(result)
 
 # 폴더 내 모든 CSV 파일 처리
