@@ -48,7 +48,7 @@ def clean_and_aggregate_folder(input_folder, output_folder):
             print(f"{file_name} 처리 완료. 결과가 {output_file_path}에 저장되었습니다.")
 
 # 실행 예시
-input_folder_path = 'D:/bok4_resource/score_count/sample/input_csvs'  # 입력 폴더 경로
-output_folder_path = 'D:/bok4_resource/score_count/sample/output_csvs'  # 출력 폴더 경로
+input_folder_path = 'D:/bok4_resource/score_count/sample/input_csv'  # 입력 폴더 경로
+output_folder_path = 'D:/bok4_resource/score_count/sample/output_csv'  # 출력 폴더 경로
 
 clean_and_aggregate_folder(input_folder_path, output_folder_path)
