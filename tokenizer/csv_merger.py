@@ -3,7 +3,7 @@ import glob
 import os
 
 # CSV 파일들이 있는 폴더 경로
-folder_path = r"C:/Users/hp/Downloads/total_bond_csv"
+folder_path = r"폴더 경로 입력하세요"
 
 # 폴더 내 모든 CSV 파일 경로 가져오기 (하위 폴더까지)
 csv_files = glob.glob(os.path.join(folder_path, '**', '*.csv'), recursive=True)
@@ -20,7 +20,7 @@ for file in csv_files:
 final_df = pd.concat(df_list, ignore_index=True)
 
 # 합친 파일 저장
-output_path = os.path.join(folder_path, "merged_all.csv")
+output_path = os.path.join(folder_path, "결과로 받을 파일 이름.csv")
 final_df.to_csv(output_path, index=False, encoding='utf-8-sig')
 
-print(f"\n✅ 모든 CSV 파일을 합쳐서 {output_path}에 저장 완료!")
+print(f"/n✅ 모든 CSV 파일을 합쳐서 {output_path}에 저장 완료!")

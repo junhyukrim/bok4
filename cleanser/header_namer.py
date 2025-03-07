@@ -37,8 +37,8 @@ def transform_txt_files(input_folder, output_folder):
             print(f"Transformed: {filename} -> {new_filename}")
 
 # 설정 값
-input_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/현대차증권"  # 기존 txt 파일이 있는 폴더 경로
-output_folder = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_pdf/bond_reports_pdf-20250227T122256Z-003/bond_reports_pdf/txt_out"  # 변환된 txt 파일을 저장할 폴더 경로
+input_folder = "D:/download/txt_bok_min-20250307T015930Z-001/txt_bok_min/split"  # 기존 txt 파일이 있는 폴더 경로
+output_folder = "D:/download/txt_bok_min-20250307T015930Z-001/txt_bok_min/header_named"  # 변환된 txt 파일을 저장할 폴더 경로
 
 # 실행
 transform_txt_files(input_folder, output_folder)
