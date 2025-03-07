@@ -32,6 +32,6 @@ def process_csv(input_file, output_file):
     df.to_csv(output_file, index=False)
 
 # 실행 예시
-input_csv = "bond_merged_clean_tokenized.csv"
-output_csv = "bond_merged_clean_tokenized.csv_with_ngrams.csv"
+input_csv = "D:/bok4_resource/bok_minute/minute_token.csv"
+output_csv = "D:/bok4_resource/bok_minute/minute_ngram.csv"
 process_csv(input_csv, output_csv)

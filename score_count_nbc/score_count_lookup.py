@@ -6,7 +6,7 @@ with open('D:/bok4_resource/score_count/sample/fina_dictionary_new.json', 'r', e
     dictionary = json.load(f)
 
 # CSV 파일 로드
-csv_file_path = 'D:/bok4_resource/score_count/sample/labeled_processed_파이낸셜_clean_tokenized_chunk_125.csv'  # CSV 파일 경로
+csv_file_path = 'D:/bok4_resource/bok_minute/minute_ngram.csv'  # CSV 파일 경로
 df = pd.read_csv(csv_file_path)
 
 # n-gram 칼럼 리스트 (예: 1gram, 2gram, ..., 5gram)
@@ -30,6 +30,6 @@ def calculate_count_and_score(row):
 df['count_and_score'] = df.apply(calculate_count_and_score, axis=1)
 
 # 결과 저장
-output_file_path = 'D:/bok4_resource/score_count/sample/output_with_count_and_score.csv'
+output_file_path = 'D:/bok4_resource/bok_minute/minute_score.csv'
 df.to_csv(output_file_path, index=False)
 print(f"결과가 {output_file_path}에 저장되었습니다.")
