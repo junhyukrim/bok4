@@ -40,6 +40,6 @@ def split_csv(input_file, output_folder, chunk_size):
         pd.DataFrame(current_chunk).to_csv(output_file, index=False)
 
 # 실행 예시
-input_csv = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_ngram/bond_ngrams.csv"
-output_dir = "C:/Users/egege/OneDrive/Documents/bok4_resource/bond_ngram/ngram_sperated"
+input_csv = "C:/Users/wosle/OneDrive/Desktop/프로젝트 파일/뉴스 라벨/labeled_processed_파이낸셜_clean_tokenized.csv"
+output_dir = "C:/Users/wosle/OneDrive/Desktop/프로젝트 파일/뉴스 라벨/파이낸셜3"
 split_csv(input_csv, output_dir, chunk_size=10000)
