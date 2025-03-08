@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 # 데이터 로드
-data = pd.read_csv('D:/bok4_resource/analysis/all_analysis_compact_bydate.csv')
+data = pd.read_csv('D:/bok4_resource/bok_minute/minute_final.csv')
 
 # NaN 및 무한값 처리
 data = data.replace([np.inf, -np.inf], np.nan)  # 무한값을 NaN으로 변환

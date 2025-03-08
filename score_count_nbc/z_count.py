@@ -37,6 +37,6 @@ def process_normalization(input_path, output_path):
     print(f"결과가 {output_path}에 저장되었습니다.")
 
 # 실행 예시
-input_path = 'D:/bok4_resource/analysis/merged_all_aggregated_output.csv'  # 입력 파일 경로
-output_path = 'D:/bok4_resource/analysis/all_z_count.csv'  # 출력 파일 경로
+input_path = 'D:/bok4_resource/bok_minute/minute_score.csv'  # 입력 파일 경로
+output_path = 'D:/bok4_resource/bok_minute/minute_z_score.csv'  # 출력 파일 경로
 process_normalization(input_path, output_path)

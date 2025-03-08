@@ -1,9 +1,9 @@
 import pandas as pd
 
 # 파일 경로
-a_path = "D:/bok4_resource/int/merged_rates_with_1_28future.csv"
-b_path = "D:/bok4_resource/analysis/all_analysis_compact_bydate_eval_copy.csv"
-output_path = "D:/bok4_resource/analysis/all_analysis_compact_bydate_eval_1_28.csv"
+a_path = "labeled_rates.csv"
+b_path = "D:/bok4_resource/bok_minute/minute_groupby_date.csv"
+output_path = "D:/bok4_resource/bok_minute/minute_groupby_date.csv"
 
 try:
     # CSV 파일 읽기
