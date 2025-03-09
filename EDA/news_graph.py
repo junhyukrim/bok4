@@ -21,6 +21,8 @@ pivot = news_df.pivot_table(index='year', columns='언론사', values='article_c
 # 연도별 합계 계산 (4개사 합계)
 pivot['total'] = pivot.sum(axis=1)
 
+
+
 # 누적 합계 계산 (꺾은선 그래프 용)
 pivot['cum_total'] = pivot['total'].cumsum()
 
