@@ -7,18 +7,13 @@ def process_columns(input_path, output_path):
 
     # 필요한 열만 남기기
     columns_to_keep = [
-        'doc_id', 'date', 'market_rate', 'base_rate', 'base_future', 
-        'market_future', 'base_label', 'market_label', 
-        'P_prime_hawkish', 'P_prime_neutral', 'P_prime_dovish', 'tone'
+        'market_label', 'tone'
     ]
     df_filtered = df[columns_to_keep]
 
     # 열 순서 변경
     columns_order = [
-        'date', 'market_rate', 'base_rate', 'base_future', 
-        'market_future', 'base_label', 'market_label', 
-        'tone', 'P_prime_hawkish', 'P_prime_neutral', 
-        'P_prime_dovish', 'doc_id'
+        'tone', 'market_label'
     ]
     df_reordered = df_filtered[columns_order]
 
@@ -27,6 +22,6 @@ def process_columns(input_path, output_path):
     print(f"결과가 {output_path}에 저장되었습니다.")
 
 # 실행 예시
-input_path = 'D:/bok4_resource/analysis/all_analysis.csv'  # 입력 파일 경로
-output_path = 'D:/bok4_resource/analysis/all_analysis_compact.csv'  # 출력 파일 경로
+input_path = 'D:/bok4_resource/analysis/all_analysis_compact_bydate_eval.csv'  # 입력 파일 경로
+output_path = 'D:/bok4_resource/analysis/all_analysis_for_ppt/label_tone_compact.csv'  # 출력 파일 경로
 process_columns(input_path, output_path)

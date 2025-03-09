@@ -40,6 +40,11 @@ def split_csv(input_file, output_folder, chunk_size):
         pd.DataFrame(current_chunk).to_csv(output_file, index=False)
 
 # 실행 예시
+<<<<<<< HEAD:merger_seperator/seperator.py
 input_csv = "C:/Users/wosle/OneDrive/Desktop/프로젝트 파일/뉴스 라벨/labeled_processed_파이낸셜_clean_tokenized.csv"
 output_dir = "C:/Users/wosle/OneDrive/Desktop/프로젝트 파일/뉴스 라벨/파이낸셜3"
+=======
+input_csv = "D:/bok4_resource/analysis/all_analysis_for_ppt.csv"
+output_dir = "D:/bok4_resource/analysis/all_analysis_for_ppt"
+>>>>>>> 0eaeba2de8fa6b742a747777cd18caa308b91c4d:merger_separator/separator.py
 split_csv(input_csv, output_dir, chunk_size=10000)

@@ -96,10 +96,6 @@ def process_all(input_path, output_path):
     df = pd.concat([df, probabilities_df], axis=1)
 
     # 열 순서 재정렬 (count_and_score을 가장 우측으로 이동)
-    columns_order = [col for col in df.columns if col != 'count_and_score'] + ['count_and_score']
-    df = df[columns_order]
-
-    # 열 순서 재정렬 (count_and_score을 가장 우측으로 이동)
     columns_order = [col for col in df.columns if col != 'z_count_and_score'] + ['z_count_and_score']
     df = df[columns_order]
 
@@ -109,6 +105,6 @@ def process_all(input_path, output_path):
 
 
 # 실행 예시
-input_path = 'D:/bok4_resource/analysis/all_z_count.csv'  # 입력 파일 경로
-output_path = 'D:/bok4_resource/analysis/all_analysis.csv'  # 출력 파일 경로
+input_path = 'D:/bok4_resource/bok_minute/minute_z_score_compact.csv'  # 입력 파일 경로
+output_path = 'D:/bok4_resource/bok_minute/minute_totalscore.csv'  # 출력 파일 경로
 process_all(input_path, output_path)
